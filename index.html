@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio - Yassine Mechergui</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin="anonymous" src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin="anonymous" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeIn 0.8s ease-in forwards;
+      opacity: 0;
+    }
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+
+    /* Hover scale effect */
+    .scale-on-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .scale-on-hover:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Background styling */
+    body {
+      background: linear-gradient(135deg, #e3e7f4 0%, #e3e7f4 100%);
+      font-family: 'Inter', sans-serif;
+      color: #f1f5f9;
+    }
+
+    /* Navigation styling */
+    nav {
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    nav a {
+      position: relative;
+      padding: 10px 0;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #f97316;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* Section styling */
+    section {
+      background: rgba(30, 41, 59, 0.95);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer styling */
+    footer {
+      background: rgba(15, 23, 42, 0.9);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Card styling for images */
+    .card-image {
+      border-radius: 8px;
+      border: 2px solid #f97316;
+      transition: border-color 0.3s ease;
+    }
+    .card-image:hover {
+      border-color: #fb923c;
+    }
+  </style>
+</head>
+<body class="font-sans relative">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // Hook for scroll animation
+    const useScrollFade = () => {
+      React.useEffect(() => {
+        const elements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.2 });
+        elements.forEach(el => observer.observe(el));
+      }, []);
+    };
+
+    const SectionWrapper = ({ id, children, delay }) => (
+      <section id={id} className={`max-w-4xl mx-auto my-12 px-6 py-10 rounded-lg fade-in delay-${delay}`}>
+        {children}
+      </section>
+    );
+
+    const Profile = () => {
+      useScrollFade();
+      return (
+        <div className="text-center">
+          <img 
+            src="assets/aziz.jpg"
+            alt="Photo de profil"
+            className="mx-auto rounded-full border-4 border-orange-500 w-48 h-48 object-cover fade-in scale-on-hover"
+          />
+          <h1 className="text-4xl font-bold mt-4 text-orange-400">
+            Yassine Mechergui
+          </h1>
+          <p className="text-gray-300 mt-3 font-medium">Email: aziz.men777@gmail.com | Téléphone: +216 58 986 288</p>
+          <p className="text-gray-400 text-sm">Adresse: Rue Menzel Bourguiba, Bardo, Tunis</p>
+        </div>
+      );
+    };
+
+    const Summary = () => (
+      <div>
+        <h2 className="text-2xl font-semibold mb-4 text-orange-400 flex items-center gap-2">
+          <span>🌟</span> Profil Professionnel
+        </h2>
+        <p className="text-gray-300 leading-relaxed">
+          Professionnel motivé, communicant agile et force d’idées pour réussir en équipe...
+        </p>
+      </div>
+    );
+
+    const Skills = () => (
+      <div>
+        <h2 className="text-2xl font-semibold mb-4 text-orange-400 flex items-center gap-2">
+          <span>🛠️</span> Compétences Clés
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {["Communication", "Travail d'Équipe", "Organisation", "Résolution de Problèmes", "Adaptabilité", "Apprentissage Continu"].map((skill, i) => (
+            <div key={i} className="bg-gray-800 p-3 rounded-lg text-center font-medium text-gray-200 scale-on-hover">
+              {skill}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+
+    const Education = () => {
+      useScrollFade();
+      return (
+        <div>
+          <h2 className="text-2xl font-semibold mb-6 text-orange-400 flex items-center gap-2">
+            <span>🎓</span> Formation
+          </h2>
+          <ul className="space-y-8">
+            <li className="flex flex-col sm:flex-row items-start gap-6">
+              <img 
+                src="assets/bac.jpg"
+                alt="Diplôme Baccalauréat"
+                className="w-48 rounded-lg card-image fade-in"
+              />
+              <div>
+                <h3 className="text-lg font-medium text-gray-200">Baccalauréat</h3>
+                <p className="text-gray-400 italic mb-1">06/2022, Tunisie</p>
+                <p className="text-gray-300">
+                  Diplôme de fin d’études secondaires avec spécialisation en économie et gestion.
+                </p>
+              </div>
+            </li>
+
+            <li className="flex flex-col sm:flex-row items-start gap-6">
+              <img 
+                src="assets/license.jpg"
+                alt="Licence Nationale en Études Technologiques"
+                className="w-48 rounded-lg card-image fade-in delay-1"
+              />
+              <div>
+                <h3 className="text-lg font-medium text-gray-200">Licence Nationale en Études Technologiques – ISET Radès</h3>
+                <p className="text-gray-400 italic mb-1">2025/Tunisie</p>
+                <p className="text-gray-300">
+                  Formation technique et pratique en technologies modernes avec projets et stages professionnels.
+                </p>
+              </div>
+            </li>
+
+            <li className="flex flex-col sm:flex-row items-start gap-6">
+              <img 
+                src="assets/allm.jpg"
+                alt="Certificat Allemand A1.2"
+                className="w-48 rounded-lg card-image fade-in delay-2"
+              />
+              <div>
+                <h3 className="text-lg font-medium text-gray-200">Certification Allemande (A1.2)</h3>
+                <p className="text-gray-400 italic mb-1">2025</p>
+                <p className="text-gray-300">
+                  Certification linguistique attestant d’un niveau débutant en allemand.
+                </p>
+              </div>
+            </li>
+
+            <li className="flex flex-col sm:flex-row items-start gap-6">
+              <img 
+                src="assets/554.jpg"
+                alt="Formation Photovoltaïque BT + ELEC & IRVE"
+                className="w-48 rounded-lg card-image fade-in delay-3"
+              />
+              <div>
+                <h3 className="text-lg font-medium text-gray-200">Formation en Photovoltaïque : BT + ELEC & IRVE</h3>
+                <p className="text-gray-400 italic mb-1">14/07/2025</p>
+                <p className="text-gray-300">
+                  Formation technique spécialisée dans l’installation, la maintenance et la mise en service 
+                  de systèmes photovoltaïques basse tension, incluant les normes électriques et l’infrastructure 
+                  de recharge pour véhicules électriques (IRVE).
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      );
+    };
+
+    const Experience = () => (
+      <div>
+        <h2 className="text-2xl font-semibold mb-4 text-orange-400 flex items-center gap-2">
+          <span>💼</span> Expérience Professionnelle
+        </h2>
+        <div>
+          <p className="font-medium text-gray-200">Technicien Freelance en Assistance Technique Mécanique</p>
+          <p className="italic mb-2 text-gray-400">Dates : 2025</p>
+          <ul className="list-disc list-inside space-y-2 text-gray-300">
+            <li>Support technique auprès de petites entreprises et particuliers dans la maintenance et la réparation mécanique.</li>
+            <li>Diagnostic préliminaire des problèmes mécaniques courants et propositions de solutions adaptées.</li>
+            <li>Conseil sur l’entretien préventif et optimisation des équipements mécaniques.</li>
+          </ul>
+        </div>
+      </div>
+    );
+
+    const Certifications = () => (
+      <div>
+        <h2 className="text-2xl font-semibold mb-4 text-orange-400 flex items-center gap-2">
+          <span>🏅</span> Certifications
+        </h2>
+        <ul className="list-disc list-inside space-y-2 text-gray-300">
+          <li>Certificat Langue Allemande (A1.2), 2021</li>
+        </ul>
+      </div>
+    );
+
+    const App = () => (
+      <div>
+        <nav className="fixed w-full top-0 py-4 px-6 flex justify-center gap-8 z-50">
+          {["profile","summary","skills","education","experience","certifications"].map((link, i) => (
+            <a key={i} href={`#${link}`} className="text-gray-200 hover:text-orange-400 transition">
+              {link.charAt(0).toUpperCase() + link.slice(1)}
+            </a>
+          ))}
+        </nav>
+
+        <div className="pt-20">
+          <SectionWrapper id="profile" delay="1"><Profile /></SectionWrapper>
+          <SectionWrapper id="summary" delay="2"><Summary /></SectionWrapper>
+          <SectionWrapper id="skills" delay="3"><Skills /></SectionWrapper>
+          <SectionWrapper id="education" delay="1"><Education /></SectionWrapper>
+          <SectionWrapper id="experience" delay="2"><Experience /></SectionWrapper>
+          <SectionWrapper id="certifications" delay="3"><Certifications /></SectionWrapper>
+        </div>
+
+        <footer className="text-center py-6 text-gray-400">
+          © 2025 Yassine Mechergui. Tous droits réservés.
+        </footer>
+      </div>
+    );
+
+    ReactDOM.render(<App />, document.getElementById("root"));
+  </script>
+</body>
+</html>
