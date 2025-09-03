@@ -9,46 +9,54 @@
   <script crossorigin="anonymous" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
+    /* Import Roboto font */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
     /* Fade-in animation */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .fade-in {
-      animation: fadeIn 0.8s ease-in forwards;
+      animation: fadeIn 0.8s ease-out forwards;
       opacity: 0;
     }
     .delay-1 { animation-delay: 0.2s; }
     .delay-2 { animation-delay: 0.4s; }
     .delay-3 { animation-delay: 0.6s; }
 
-    /* Hover scale effect */
+    /* Hover effects */
     .scale-on-hover {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .scale-on-hover:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      transform: scale(1.03);
+      box-shadow: 0 8px 24px rgba(0, 255, 255, 0.2);
     }
 
     /* Background styling */
     body {
-      background: linear-gradient(135deg, #e3e7f4 0%, #e3e7f4 100%);
-      font-family: 'Inter', sans-serif;
-      color: #f1f5f9;
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      font-family: 'Roboto', sans-serif;
+      color: #e2e8f0;
     }
 
     /* Navigation styling */
     nav {
-      background: rgba(15, 23, 42, 0.9);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(45, 212, 191, 0.2);
     }
     nav a {
       position: relative;
-      padding: 10px 0;
-      font-weight: 600;
-      color: #e2e8f0;
+      padding: 12px 0;
+      font-weight: 500;
+      color: #cbd5e1;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #2dd4bf;
     }
     nav a::after {
       content: '';
@@ -57,7 +65,7 @@
       left: 0;
       width: 100%;
       height: 2px;
-      background: #f97316;
+      background: #2dd4bf;
       transform: scaleX(0);
       transform-origin: right;
       transition: transform 0.3s ease;
@@ -69,33 +77,37 @@
 
     /* Section styling */
     section {
-      background: rgba(30, 41, 59, 0.95);
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      background: rgba(30, 41, 59, 0.9);
+      border-radius: 16px;
+      border: 1px solid rgba(45, 212, 191, 0.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+    section:hover {
+      border-color: rgba(45, 212, 191, 0.3);
     }
 
     /* Footer styling */
     footer {
-      background: rgba(15, 23, 42, 0.9);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
+      background: rgba(15, 23, 42, 0.95);
+      border-top: 1px solid rgba(45, 212, 191, 0.2);
+      backdrop-filter: blur(12px);
     }
 
     /* Card styling for images */
     .card-image {
-      border-radius: 8px;
-      border: 2px solid #f97316;
-      transition: border-color 0.3s ease;
+      border-radius: 12px;
+      border: 2px solid #2dd4bf;
+      transition: border-color 0.3s ease, transform 0.3s ease;
     }
     .card-image:hover {
-      border-color: #fb923c;
+      border-color: #5eead4;
+      transform: scale(1.02);
     }
   </style>
 </head>
 <body class="font-sans relative">
   <div id="root"></div>
-
   <script type="text/babel">
     // Hook for scroll animation
     const useScrollFade = () => {
@@ -111,123 +123,93 @@
         elements.forEach(el => observer.observe(el));
       }, []);
     };
-
     const SectionWrapper = ({ id, children, delay }) => (
-      <section id={id} className={`max-w-4xl mx-auto my-12 px-6 py-10 rounded-lg fade-in delay-${delay}`}>
+      <section id={id} className={`max-w-5xl mx-auto my-16 px-8 py-12 rounded-lg fade-in delay-${delay}`}>
         {children}
       </section>
     );
-
     const Profile = () => {
       useScrollFade();
       return (
         <div className="text-center">
-          <img 
+          <img
             src="assets/aziz.jpg"
             alt="Photo de profil"
-            className="mx-auto rounded-full border-4 border-orange-500 w-48 h-48 object-cover fade-in scale-on-hover"
+            className="mx-auto rounded-full border-4 border-teal-500 w-52 h-52 object-cover fade-in scale-on-hover"
           />
-          <h1 className="text-4xl font-bold mt-4 text-orange-400">
+          <h1 className="text-5xl font-bold mt-6 text-teal-400">
             Yassine Mechergui
           </h1>
-          <p className="text-gray-300 mt-3 font-medium">Email: aziz.men777@gmail.com | Téléphone: +216 58 986 288</p>
-          <p className="text-gray-400 text-sm">Adresse: Rue Menzel Bourguiba, Bardo, Tunis</p>
+          <p className="text-gray-300 mt-4 font-medium">Email: aziz.men777@gmail.com | Téléphone: +216 58 986 288</p>
+          <p className="text-gray-400 text-sm mt-2">Adresse: Rue Menzel Bourguiba, Bardo, Tunis</p>
         </div>
       );
     };
-
     const Summary = () => (
       <div>
-        <h2 className="text-2xl font-semibold mb-4 text-orange-400 flex items-center gap-2">
+        <h2 className="text-3xl font-semibold mb-6 text-teal-400 flex items-center gap-3">
           <span>🌟</span> Profil Professionnel
         </h2>
-        <p className="text-gray-300 leading-relaxed">
-          Professionnel motivé, communicant agile et force d’idées pour réussir en équipe...
+        <p className="text-gray-300 leading-relaxed text-lg">
+          Professionnel motivé, communicant agile et force d’idées pour réussir en équipe. Passionné par les technologies modernes et l’innovation, avec une forte capacité à résoudre des problèmes complexes et à s’adapter à des environnements dynamiques.
         </p>
       </div>
     );
-
     const Skills = () => (
       <div>
-        <h2 className="text-2xl font-semibold mb-4 text-orange-400 flex items-center gap-2">
+        <h2 className="text-3xl font-semibold mb-6 text-teal-400 flex items-center gap-3">
           <span>🛠️</span> Compétences Clés
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {["Communication", "Travail d'Équipe", "Organisation", "Résolution de Problèmes", "Adaptabilité", "Apprentissage Continu"].map((skill, i) => (
-            <div key={i} className="bg-gray-800 p-3 rounded-lg text-center font-medium text-gray-200 scale-on-hover">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {["Travail d’Équipe", "Organisation", "Résolution de Problèmes", "Expertise en systèmes électriques", "Connaissance des systèmes photovoltaïques et de l’électricité industrielle"].map((skill, i) => (
+            <div key={i} className="bg-gray-800 p-4 rounded-lg text-center font-medium text-gray-200 scale-on-hover">
               {skill}
+            </div>
+          ))}
+        </div>
+        <h3 className="text-xl font-medium mt-8 text-teal-400">Outils et Logiciels</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mt-3">
+          {["AutoCAD", "PSIM", "Dialux", "Caneco BT", "ISIS", "Word", "PowerPoint", "Excel", "Xrelais", "TIA Portal", "MATLAB", "Simulink", "SolidWorks"].map((tool, i) => (
+            <div key={i} className="bg-gray-800 p-3 rounded text-center text-gray-200 scale-on-hover">
+              {tool}
             </div>
           ))}
         </div>
       </div>
     );
-
     const Education = () => {
       useScrollFade();
       return (
         <div>
-          <h2 className="text-2xl font-semibold mb-6 text-orange-400 flex items-center gap-2">
+          <h2 className="text-3xl font-semibold mb-6 text-teal-400 flex items-center gap-3">
             <span>🎓</span> Formation
           </h2>
           <ul className="space-y-8">
             <li className="flex flex-col sm:flex-row items-start gap-6">
-              <img 
+              <img
                 src="assets/bac.jpg"
                 alt="Diplôme Baccalauréat"
-                className="w-48 rounded-lg card-image fade-in"
+                className="w-52 rounded-lg card-image fade-in"
               />
               <div>
-                <h3 className="text-lg font-medium text-gray-200">Baccalauréat</h3>
-                <p className="text-gray-400 italic mb-1">06/2022, Tunisie</p>
+                <h3 className="text-xl font-medium text-gray-200">Baccalauréat en Sciences Techniques</h3>
+                <p className="text-gray-400 italic mb-2">06/2022, Tunisie</p>
                 <p className="text-gray-300">
-                  Diplôme de fin d’études secondaires avec spécialisation en économie et gestion.
+                  Diplôme de fin d’études secondaires avec spécialisation en sciences techniques.
                 </p>
               </div>
             </li>
-
             <li className="flex flex-col sm:flex-row items-start gap-6">
-              <img 
+              <img
                 src="assets/license.jpg"
-                alt="Licence Nationale en Études Technologiques"
-                className="w-48 rounded-lg card-image fade-in delay-1"
+                alt="Licence Nationale en Génie Électrique"
+                className="w-52 rounded-lg card-image fade-in delay-1"
               />
               <div>
-                <h3 className="text-lg font-medium text-gray-200">Licence Nationale en Études Technologiques – ISET Radès</h3>
-                <p className="text-gray-400 italic mb-1">2025/Tunisie</p>
+                <h3 className="text-xl font-medium text-gray-200">Licence Nationale en Génie Électrique, Spécialité Électricité Industrielle – ISET Radès</h3>
+                <p className="text-gray-400 italic mb-2">2025, Tunisie</p>
                 <p className="text-gray-300">
-                  Formation technique et pratique en technologies modernes avec projets et stages professionnels.
-                </p>
-              </div>
-            </li>
-
-            <li className="flex flex-col sm:flex-row items-start gap-6">
-              <img 
-                src="assets/allm.jpg"
-                alt="Certificat Allemand A1.2"
-                className="w-48 rounded-lg card-image fade-in delay-2"
-              />
-              <div>
-                <h3 className="text-lg font-medium text-gray-200">Certification Allemande (A1.2)</h3>
-                <p className="text-gray-400 italic mb-1">2025</p>
-                <p className="text-gray-300">
-                  Certification linguistique attestant d’un niveau débutant en allemand.
-                </p>
-              </div>
-            </li>
-
-            <li className="flex flex-col sm:flex-row items-start gap-6">
-              <img 
-                src="assets/554.jpg"
-                alt="Formation Photovoltaïque BT + ELEC & IRVE"
-                className="w-48 rounded-lg card-image fade-in delay-3"
-              />
-              <div>
-                <h3 className="text-lg font-medium text-gray-200">Formation en Photovoltaïque : BT + ELEC & IRVE</h3>
-                <p className="text-gray-400 italic mb-1">14/07/2025</p>
-                <p className="text-gray-300">
-                  Formation technique spécialisée dans l’installation, la maintenance et la mise en service 
-                  de systèmes photovoltaïques basse tension, incluant les normes électriques et l’infrastructure 
-                  de recharge pour véhicules électriques (IRVE).
+                  Formation technique et pratique en génie électrique avec spécialisation en électricité industrielle, incluant projets et stages professionnels.
                 </p>
               </div>
             </li>
@@ -235,60 +217,98 @@
         </div>
       );
     };
-
-    const Experience = () => (
+    const Projects = () => (
       <div>
-        <h2 className="text-2xl font-semibold mb-4 text-orange-400 flex items-center gap-2">
-          <span>💼</span> Expérience Professionnelle
+        <h2 className="text-3xl font-semibold mb-6 text-teal-400 flex items-center gap-3">
+          <span>🔧</span> Projets
         </h2>
-        <div>
-          <p className="font-medium text-gray-200">Technicien Freelance en Assistance Technique Mécanique</p>
-          <p className="italic mb-2 text-gray-400">Dates : 2025</p>
-          <ul className="list-disc list-inside space-y-2 text-gray-300">
-            <li>Support technique auprès de petites entreprises et particuliers dans la maintenance et la réparation mécanique.</li>
-            <li>Diagnostic préliminaire des problèmes mécaniques courants et propositions de solutions adaptées.</li>
-            <li>Conseil sur l’entretien préventif et optimisation des équipements mécaniques.</li>
-          </ul>
-        </div>
-      </div>
-    );
-
-    const Certifications = () => (
-      <div>
-        <h2 className="text-2xl font-semibold mb-4 text-orange-400 flex items-center gap-2">
-          <span>🏅</span> Certifications
-        </h2>
-        <ul className="list-disc list-inside space-y-2 text-gray-300">
-          <li>Certificat Langue Allemande (A1.2), 2021</li>
+        <ul className="space-y-8">
+          <li className="flex flex-col items-start gap-6">
+            <div>
+              <h3 className="text-xl font-medium text-gray-200">Final Year Project</h3>
+              <p className="text-gray-400 italic mb-2">BIC Engineering Office, sous la supervision de M. Ferjani Salem (Ingénieur Consultant)</p>
+              <p className="text-gray-300">
+                Projet axé sur la conception de l’installation électrique pour le département des urgences de l’Hôpital Universitaire Sahloul.
+              </p>
+              <p className="text-gray-400">Durée : 4 mois (2025)</p>
+              <p className="text-gray-400">Tech : AutoCAD, Dialux, Caneco BT, MATLAB, Simulink, SolidWorks</p>
+            </div>
+          </li>
         </ul>
       </div>
     );
-
+    const Experience = () => (
+      <div>
+        <h2 className="text-3xl font-semibold mb-6 text-teal-400 flex items-center gap-3">
+          <span>💼</span> Expérience Professionnelle
+        </h2>
+        <div className="mb-8">
+          <p className="font-medium text-gray-200 text-lg">Technicien Freelance en Assistance Technique Électrique</p>
+          <p className="italic mb-2 text-gray-400">2025</p>
+          <ul className="list-disc list-inside space-y-2 text-gray-300">
+            <li>Support technique auprès de petites entreprises et particuliers dans la maintenance et la réparation électrique.</li>
+            <li>Diagnostic préliminaire des problèmes électriques courants et propositions de solutions adaptées.</li>
+            <li>Conseil sur l’entretien préventif et optimisation des équipements électriques.</li>
+          </ul>
+        </div>
+        <div className="mb-8">
+          <p className="font-medium text-gray-200 text-lg">Advanced Internship</p>
+          <p className="italic mb-2 text-gray-400">TRANSTU (Tunis Light Rail/Metro Company), During Electrical Engineering studies, specialized in Industrial Electricity, 1 month</p>
+        </div>
+        <div>
+          <p className="font-medium text-gray-200 text-lg">Introductory Internship</p>
+          <p className="italic mb-2 text-gray-400">TRANSTU (Tunis Light Rail/Metro Company), As part of Electrical Engineering studies, 1 month</p>
+        </div>
+      </div>
+    );
+    const Certifications = () => (
+      <div>
+        <h2 className="text-3xl font-semibold mb-6 text-teal-400 flex items-center gap-3">
+          <span>🏅</span> Certifications
+        </h2>
+        <ul className="list-disc list-inside space-y-3 text-gray-300">
+          <li>Certificat Langue Allemande A1.2, 2021<br/>Certification linguistique attestant d’un niveau débutant en allemand.</li>
+          <li>Photovoltaïque : BT + ELEC & IRVE, 14/07/2025<br/>Formation technique spécialisée dans l’installation, la maintenance et la mise en service de systèmes photovoltaïques basse tension, incluant les normes électriques et l’infrastructure de recharge pour véhicules électriques.</li>
+        </ul>
+      </div>
+    );
+    const Languages = () => (
+      <div>
+        <h2 className="text-3xl font-semibold mb-6 text-teal-400 flex items-center gap-3">
+          <span>🌍</span> Langues
+        </h2>
+        <ul className="list-disc list-inside space-y-3 text-gray-300">
+          <li>Arabe : Natif</li>
+          <li>Français : Courant</li>
+          <li>Anglais : Intermédiaire</li>
+          <li>Allemand : Niveau A1.2 (Certifié)</li>
+        </ul>
+      </div>
+    );
     const App = () => (
       <div>
-        <nav className="fixed w-full top-0 py-4 px-6 flex justify-center gap-8 z-50">
-          {["profile","summary","skills","education","experience","certifications"].map((link, i) => (
-            <a key={i} href={`#${link}`} className="text-gray-200 hover:text-orange-400 transition">
+        <nav className="fixed w-full top-0 py-5 px-8 flex justify-center gap-10 z-50">
+          {["profile","summary","skills","education","projects","experience","certifications","languages"].map((link, i) => (
+            <a key={i} href={`#${link}`} className="text-gray-200 hover:text-teal-400 transition">
               {link.charAt(0).toUpperCase() + link.slice(1)}
             </a>
           ))}
         </nav>
-
-        <div className="pt-20">
+        <div className="pt-24">
           <SectionWrapper id="profile" delay="1"><Profile /></SectionWrapper>
           <SectionWrapper id="summary" delay="2"><Summary /></SectionWrapper>
           <SectionWrapper id="skills" delay="3"><Skills /></SectionWrapper>
           <SectionWrapper id="education" delay="1"><Education /></SectionWrapper>
-          <SectionWrapper id="experience" delay="2"><Experience /></SectionWrapper>
-          <SectionWrapper id="certifications" delay="3"><Certifications /></SectionWrapper>
+          <SectionWrapper id="projects" delay="2"><Projects /></SectionWrapper>
+          <SectionWrapper id="experience" delay="3"><Experience /></SectionWrapper>
+          <SectionWrapper id="certifications" delay="1"><Certifications /></SectionWrapper>
+          <SectionWrapper id="languages" delay="2"><Languages /></SectionWrapper>
         </div>
-
-        <footer className="text-center py-6 text-gray-400">
+        <footer className="text-center py-8 text-gray-400 text-sm">
           © 2025 Yassine Mechergui. Tous droits réservés.
         </footer>
       </div>
     );
-
     ReactDOM.render(<App />, document.getElementById("root"));
   </script>
 </body>
